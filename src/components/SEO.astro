@@ -1,0 +1,123 @@
+---
+import { site } from '../config/site';
+import { getLangFromUrl, getAlternateLinks, useTranslations } from '../i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Absolute or /public-relative path to the social share image. */
+  image?: string;
+  /** Set true on pages that should not be indexed. */
+  noindex?: boolean;
+  /** Override the canonical URL if needed. */
+  canonical?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const {
+  title,
+  description = t('site.description'),
+  image = '/og-image.jpg',
+  noindex = false,
+  canonical,
+} = Astro.props;
+
+const siteName = t('site.name');
+const pageTitle = title ? `${title} · ${siteName}` : `${siteName} — ${t('site.tagline')}`;
+
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.site).href;
+
+const alternates = getAlternateLinks(Astro.url);
+const ogLocale = lang === 'es' ? 'es_US' : 'en_US';
+
+// --- Structured data -------------------------------------------------------
+const openingHoursSpec = site.openingHours.map((h) => ({
+  '@type': 'OpeningHoursSpecification',
+  dayOfWeek: h.days,
+  opens: h.opens,
+  closes: h.closes,
+}));
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'CleaningService',
+  '@id': `${site.url}/#business`,
+  name: site.name,
+  url: site.url,
+  image: imageURL,
+  description,
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  priceRange: site.priceRange,
+  address: {
+    '@type': 'PostalAddress',
+    ...(site.address.streetAddress ? { streetAddress: site.address.streetAddress } : {}),
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    ...(site.address.postalCode ? { postalCode: site.address.postalCode } : {}),
+    addressCountry: site.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.geo.latitude,
+    longitude: site.geo.longitude,
+  },
+  areaServed: site.areaServed.map((name) => ({ '@type': 'Place', name })),
+  openingHoursSpecification: openingHoursSpec,
+  sameAs: Object.values(site.social).filter(Boolean),
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  inLanguage: alternates.map((a) => (a.lang === 'es' ? 'es-US' : 'en-US')),
+  publisher: { '@id': `${site.url}/#business` },
+};
+---
+
+<!-- Primary meta -->
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- hreflang -->
+{
+  alternates.map((alt) => (
+    <link
+      rel="alternate"
+      hreflang={alt.lang === 'es' ? 'es-US' : 'en-US'}
+      href={new URL(alt.href, Astro.site).href}
+    />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:locale" content={ogLocale} />
+{alternates.filter((a) => a.lang !== lang).map((a) => (
+  <meta property="og:locale:alternate" content={a.lang === 'es' ? 'es_US' : 'en_US'} />
+))}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageURL} />
+
+<!-- Structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(localBusiness)} is:inline />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} is:inline />

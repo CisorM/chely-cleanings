@@ -1,0 +1,45 @@
+---
+import BeforeAfterSlider from './BeforeAfterSlider.astro';
+import beforeKitchen from '../assets/gallery/before-kitchen.jpg';
+import afterKitchen from '../assets/gallery/after-kitchen.jpg';
+import beforeBathroom from '../assets/gallery/before-bathroom.jpg';
+import afterBathroom from '../assets/gallery/after-bathroom.jpg';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const items = [
+  { before: beforeKitchen, after: afterKitchen, label: t('gallery.item1') },
+  { before: beforeBathroom, after: afterBathroom, label: t('gallery.item2') },
+];
+---
+
+<section id="gallery" class="relative py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-sm font-bold uppercase tracking-widest text-gradient-brand">
+        {t('gallery.eyebrow')}
+      </span>
+      <h2 class="mt-3 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+        {t('gallery.title')}
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">{t('gallery.subtitle')}</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {
+        items.map((item) => (
+          <BeforeAfterSlider
+            before={item.before}
+            after={item.after}
+            label={item.label}
+            beforeLabel={t('gallery.before')}
+            afterLabel={t('gallery.after')}
+            hint={t('gallery.hint')}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

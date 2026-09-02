@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Chely Cleaning Services and Solutions — design system
+ * Ported from the Lovable prototype (styles.css).
+ *
+ * Brand: purple #5E1B8E (primary) · green #6EB92E (secondary)
+ * All semantic colors use oklch. The @theme inline block maps the CSS custom
+ * properties to Tailwind utilities (--color-primary -> bg-primary / text-primary).
+ * Values live in :root (light) and .dark (dark).
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-glow: var(--primary-glow);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Fredoka", "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Chely brand: purple #5E1B8E, green #6EB92E */
+  --background: oklch(0.995 0.003 300);
+  --foreground: oklch(0.22 0.03 300);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.03 300);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.03 300);
+  --primary: oklch(0.36 0.19 305);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-glow: oklch(0.48 0.22 305);
+  --secondary: oklch(0.72 0.19 135);
+  --secondary-foreground: oklch(0.15 0.02 300);
+  --accent: oklch(0.96 0.02 135);
+  --accent-foreground: oklch(0.36 0.19 305);
+  --muted: oklch(0.965 0.008 300);
+  --muted-foreground: oklch(0.48 0.03 300);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.015 300);
+  --input: oklch(0.92 0.015 300);
+  --ring: oklch(0.36 0.19 305);
+}
+
+.dark {
+  --background: oklch(0.17 0.02 300);
+  --foreground: oklch(0.97 0.005 300);
+  --card: oklch(0.21 0.025 300);
+  --card-foreground: oklch(0.97 0.005 300);
+  --popover: oklch(0.21 0.025 300);
+  --popover-foreground: oklch(0.97 0.005 300);
+  --primary: oklch(0.6 0.2 305);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-glow: oklch(0.68 0.19 305);
+  --secondary: oklch(0.72 0.19 135);
+  --secondary-foreground: oklch(0.15 0.02 300);
+  --accent: oklch(0.3 0.04 300);
+  --accent-foreground: oklch(0.97 0.005 300);
+  --muted: oklch(0.27 0.03 300);
+  --muted-foreground: oklch(0.72 0.03 300);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.6 0.2 305);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* offset for the fixed header on anchor jumps */
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Brand gradient helpers (used across CTAs, badges, icon tiles) */
+@utility gradient-brand {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-glow)
+  );
+}
+
+@utility text-gradient-brand {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import extended from '../assets/brand/logo-extended.jpg';
+import icon from '../assets/brand/logo-icon.png';
+
+interface Props {
+  variant?: 'extended' | 'icon';
+  class?: string;
+  alt?: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const {
+  variant = 'extended',
+  class: className = '',
+  alt = 'Chely Cleaning Services and Solutions',
+  loading = 'eager',
+} = Astro.props;
+
+const src = variant === 'icon' ? icon : extended;
+---
+
+<Image
+  src={src}
+  alt={alt}
+  class={className}
+  loading={loading}
+  densities={[1, 2]}
+/>

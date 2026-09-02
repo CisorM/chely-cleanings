@@ -1,0 +1,62 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const highlights = [
+  { title: t('about.highlight1.title'), desc: t('about.highlight1.body'), icon: '🛡️' },
+  { title: t('about.highlight2.title'), desc: t('about.highlight2.body'), icon: '✨' },
+  { title: t('about.highlight3.title'), desc: t('about.highlight3.body'), icon: '📍' },
+];
+---
+
+<section id="about" class="relative py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-sm font-bold uppercase tracking-widest">
+        <span class="text-gradient-brand">{t('about.eyebrow')}</span>
+      </span>
+      <h2 class="mt-3 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+        {t('about.title')}
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">{t('about.intro')}</p>
+    </div>
+
+    <div class="mt-16 grid gap-6 lg:grid-cols-2">
+      <article class="relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-sm sm:p-10">
+        <div class="absolute right-0 top-0 h-32 w-32 -translate-y-10 translate-x-10 rounded-full bg-primary/10 blur-2xl"></div>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+          {t('about.missionLabel')}
+        </div>
+        <p class="relative text-base leading-relaxed text-foreground/80 sm:text-lg">
+          {t('about.mission')}
+        </p>
+      </article>
+
+      <article class="relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-sm sm:p-10">
+        <div class="absolute right-0 top-0 h-32 w-32 -translate-y-10 translate-x-10 rounded-full bg-secondary/20 blur-2xl"></div>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+          {t('about.visionLabel')}
+        </div>
+        <p class="relative text-base leading-relaxed text-foreground/80 sm:text-lg">
+          {t('about.vision')}
+        </p>
+      </article>
+    </div>
+
+    <div class="mt-10 grid gap-4 sm:grid-cols-3">
+      {
+        highlights.map((h) => (
+          <div class="group rounded-2xl border border-border bg-card p-6 text-center transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
+            <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl gradient-brand text-2xl shadow-md shadow-primary/25">
+              <span>{h.icon}</span>
+            </div>
+            <h3 class="mt-4 text-lg font-bold text-foreground">{h.title}</h3>
+            <p class="mt-1 text-sm text-muted-foreground">{h.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

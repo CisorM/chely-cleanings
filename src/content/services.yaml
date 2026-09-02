@@ -1,0 +1,134 @@
+# Services section — one entry per service per language.
+# `icon` is an emoji rendered in the card's icon tile (matches the prototype).
+
+# ---------- Residential · English ----------
+- id: standard-cleaning-en
+  lang: en
+  category: residential
+  order: 1
+  icon: "🧽"
+  title: Standard Cleaning
+  description: Dusting, vacuuming, mopping and bathroom/kitchen sanitization.
+
+- id: deep-cleaning-en
+  lang: en
+  category: residential
+  order: 2
+  icon: "🫧"
+  title: Deep Cleaning
+  description: Detailed scrubbing of baseboards, appliances and hard-to-reach areas.
+
+- id: move-in-out-en
+  lang: en
+  category: residential
+  order: 3
+  icon: "📦"
+  title: Move-In / Move-Out
+  description: Preparing your home for a fresh start — or getting your deposit back.
+
+- id: post-construction-en
+  lang: en
+  category: residential
+  order: 4
+  icon: "🧰"
+  title: Post-Construction
+  description: Cleaning up dust and debris after renovations, ready to live in.
+
+# ---------- Commercial · English ----------
+- id: office-cleaning-en
+  lang: en
+  category: commercial
+  order: 1
+  icon: "🏢"
+  title: Office Cleaning
+  description: Desks, common areas, breakrooms and restroom sanitation.
+
+- id: floor-care-en
+  lang: en
+  category: commercial
+  order: 2
+  icon: "🧹"
+  title: Floor Care
+  description: Expert vacuuming, mopping and floor maintenance.
+
+- id: window-cleaning-en
+  lang: en
+  category: commercial
+  order: 3
+  icon: "🪟"
+  title: Window Cleaning
+  description: Interior glass and entrance doors for a crystal-clear look.
+
+- id: janitorial-en
+  lang: en
+  category: commercial
+  order: 4
+  icon: "🧴"
+  title: Janitorial Services
+  description: Trash removal, dusting and restocking supplies.
+
+# ---------- Residential · Español ----------
+- id: standard-cleaning-es
+  lang: es
+  category: residential
+  order: 1
+  icon: "🧽"
+  title: Limpieza Estándar
+  description: Quitar el polvo, aspirar, trapear y desinfectar baños y cocina.
+
+- id: deep-cleaning-es
+  lang: es
+  category: residential
+  order: 2
+  icon: "🫧"
+  title: Limpieza Profunda
+  description: Fregado detallado de zócalos, electrodomésticos y zonas de difícil acceso.
+
+- id: move-in-out-es
+  lang: es
+  category: residential
+  order: 3
+  icon: "📦"
+  title: Mudanza (Entrada / Salida)
+  description: Prepare su hogar para empezar de cero — o recupere su depósito.
+
+- id: post-construction-es
+  lang: es
+  category: residential
+  order: 4
+  icon: "🧰"
+  title: Post-Construcción
+  description: Limpieza de polvo y escombros después de remodelaciones, listo para habitar.
+
+# ---------- Commercial · Español ----------
+- id: office-cleaning-es
+  lang: es
+  category: commercial
+  order: 1
+  icon: "🏢"
+  title: Limpieza de Oficinas
+  description: Escritorios, áreas comunes, salas de descanso y sanitización de baños.
+
+- id: floor-care-es
+  lang: es
+  category: commercial
+  order: 2
+  icon: "🧹"
+  title: Cuidado de Pisos
+  description: Aspirado, trapeado y mantenimiento de pisos por expertos.
+
+- id: window-cleaning-es
+  lang: es
+  category: commercial
+  order: 3
+  icon: "🪟"
+  title: Limpieza de Ventanas
+  description: Vidrios interiores y puertas de entrada para una vista cristalina.
+
+- id: janitorial-es
+  lang: es
+  category: commercial
+  order: 4
+  icon: "🧴"
+  title: Servicios de Conserjería
+  description: Retiro de basura, quitar el polvo y reposición de suministros.

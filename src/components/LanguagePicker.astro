@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, getAlternateLinks, languages, useTranslations } from '../i18n/utils';
+
+const current = getLangFromUrl(Astro.url);
+const t = useTranslations(current);
+const alternates = getAlternateLinks(Astro.url);
+---
+
+<div
+  class="inline-flex items-center rounded-full border border-border bg-card/70 p-0.5 text-xs font-bold backdrop-blur"
+  role="group"
+  aria-label={t('nav.langLabel')}
+>
+  {
+    alternates.map((alt) => (
+      <a
+        href={alt.href}
+        hreflang={alt.lang}
+        lang={alt.lang}
+        aria-current={alt.lang === current ? 'true' : undefined}
+        class:list={[
+          'rounded-full px-2.5 py-1 uppercase tracking-wide transition-colors',
+          alt.lang === current
+            ? 'gradient-brand text-primary-foreground'
+            : 'text-muted-foreground hover:text-primary',
+        ]}
+      >
+        {alt.lang}
+        <span class="sr-only"> — {languages[alt.lang]}</span>
+      </a>
+    ))
+  }
+</div>
