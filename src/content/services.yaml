@@ -8,7 +8,7 @@
   order: 1
   icon: "🧽"
   title: Standard Cleaning
-  description: Dusting, vacuuming, mopping and bathroom/kitchen sanitization.
+  description: Dusting, vacuuming, mopping, bathroom, kitchen, bedroom and common areas.
 
 - id: deep-cleaning-en
   lang: en
@@ -74,7 +74,7 @@
   order: 1
   icon: "🧽"
   title: Limpieza Estándar
-  description: Quitar el polvo, aspirar, trapear y desinfectar baños y cocina.
+  description: Quitar el polvo, aspirar, trapear, baño, cocina, dormitorio y áreas comunes.
 
 - id: deep-cleaning-es
   lang: es

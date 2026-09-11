@@ -1,131 +1,152 @@
 ---
-import Logo from './Logo.astro';
-import LanguagePicker from './LanguagePicker.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Logo from "./Logo.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const links = [
-  { href: '#home', label: t('nav.home') },
-  { href: '#about', label: t('nav.about') },
-  { href: '#services', label: t('nav.services') },
-  { href: '#gallery', label: t('nav.gallery') },
-  { href: '#contact', label: t('nav.contact') },
+    { href: "#home", label: t("nav.home") },
+    { href: "#about", label: t("nav.about") },
+    { href: "#services", label: t("nav.services") },
+    { href: "#gallery", label: t("nav.gallery") },
+    { href: "#contact", label: t("nav.contact") },
 ];
 ---
 
 <a
-  href="#main"
-  class="sr-only focus:not-sr-only focus:fixed focus:z-[60] focus:left-3 focus:top-3 focus:rounded-lg focus:bg-card focus:px-4 focus:py-2 focus:text-primary focus:shadow-lg"
+    href="#main"
+    class="sr-only focus:not-sr-only focus:fixed focus:z-[60] focus:left-3 focus:top-3 focus:rounded-lg focus:bg-card focus:px-4 focus:py-2 focus:text-primary focus:shadow-lg"
 >
-  {t('nav.skip')}
+    {t("nav.skip")}
 </a>
 
 <header
-  id="site-header"
-  class="fixed inset-x-0 top-0 z-50 bg-transparent transition-all"
+    id="site-header"
+    class="fixed inset-x-0 top-0 z-50 bg-transparent transition-all"
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-    <a href="#home" class="flex min-w-0 shrink-0 items-center gap-2" aria-label={t('site.name')}>
-      <Logo variant="extended" class="h-10 w-auto sm:h-12" />
-    </a>
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <a
+            href="#home"
+            class="flex min-w-0 shrink-0 items-center gap-2"
+            aria-label={t("site.name")}
+        >
+            <Logo variant="extended" class="h-12 w-auto sm:h-16" />
+        </a>
 
-    <nav class="hidden items-center gap-8 md:flex">
-      {
-        links.map((l) => (
-          <a
-            href={l.href}
-            class="text-sm font-semibold text-foreground/80 transition-colors hover:text-primary"
-          >
-            {l.label}
-          </a>
-        ))
-      }
-    </nav>
+        <nav class="hidden items-center gap-8 md:flex">
+            {links.map((l) => (
+                <a
+                    href={l.href}
+                    class="text-sm font-semibold text-foreground/80 transition-colors hover:text-primary"
+                >
+                    {l.label}
+                </a>
+            ))}
+        </nav>
 
-    <div class="flex items-center gap-2">
-      <div class="hidden md:block"><LanguagePicker /></div>
-      <a
-        href="#booking"
-        class="hidden rounded-full gradient-brand px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-md shadow-primary/25 transition-transform hover:scale-[1.03] sm:inline-flex"
-      >
-        {t('nav.cta')}
-      </a>
-      <button
-        type="button"
-        id="menu-toggle"
-        aria-label={t('nav.menu')}
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        class="grid h-10 w-10 place-items-center rounded-lg border border-border bg-card/60 backdrop-blur md:hidden"
-      >
-        <svg data-menu-open class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
-        </svg>
-        <svg data-menu-close class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round" />
-        </svg>
-      </button>
+        <div class="flex items-center gap-2">
+            <div class="hidden md:block">
+                <LanguagePicker />
+            </div>
+            <a
+                href="#booking"
+                class="hidden rounded-full gradient-brand px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-md shadow-primary/25 transition-transform hover:scale-[1.03] sm:inline-flex"
+            >
+                {t("nav.cta")}
+            </a>
+            <button
+                type="button"
+                id="menu-toggle"
+                aria-label={t("nav.menu")}
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                class="grid h-10 w-10 place-items-center rounded-lg border border-border bg-card/60 backdrop-blur md:hidden"
+            >
+                <svg
+                    data-menu-open
+                    class="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
+                </svg>
+                <svg
+                    data-menu-close
+                    class="hidden h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
     </div>
-  </div>
 
-  <div id="mobile-menu" class="hidden border-t border-border bg-background md:hidden">
-    <nav class="flex flex-col px-4 py-4">
-      {
-        links.map((l) => (
-          <a
-            href={l.href}
-            data-mobile-link
-            class="py-3 text-base font-semibold text-foreground/80 hover:text-primary"
-          >
-            {l.label}
-          </a>
-        ))
-      }
-      <a
-        href="#booking"
-        data-mobile-link
-        class="mt-2 inline-flex justify-center rounded-full gradient-brand px-5 py-3 text-sm font-bold text-primary-foreground"
-      >
-        {t('nav.cta')}
-      </a>
-      <div class="mt-4"><LanguagePicker /></div>
-    </nav>
-  </div>
+    <div
+        id="mobile-menu"
+        class="hidden border-t border-border bg-background md:hidden"
+    >
+        <nav class="flex flex-col px-4 py-4">
+            {links.map((l) => (
+                <a
+                    href={l.href}
+                    data-mobile-link
+                    class="py-3 text-base font-semibold text-foreground/80 hover:text-primary"
+                >
+                    {l.label}
+                </a>
+            ))}
+            <a
+                href="#booking"
+                data-mobile-link
+                class="mt-2 inline-flex justify-center rounded-full gradient-brand px-5 py-3 text-sm font-bold text-primary-foreground"
+            >
+                {t("nav.cta")}
+            </a>
+            <div class="mt-4">
+                <LanguagePicker />
+            </div>
+        </nav>
+    </div>
 </header>
 
 <script>
-  const header = document.getElementById('site-header');
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const openIcon = toggle?.querySelector('[data-menu-open]');
-  const closeIcon = toggle?.querySelector('[data-menu-close]');
+    const header = document.getElementById("site-header");
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const openIcon = toggle?.querySelector("[data-menu-open]");
+    const closeIcon = toggle?.querySelector("[data-menu-close]");
 
-  const setOpen = (open: boolean) => {
-    if (!menu || !toggle) return;
-    menu.classList.toggle('hidden', !open);
-    openIcon?.classList.toggle('hidden', open);
-    closeIcon?.classList.toggle('hidden', !open);
-    toggle.setAttribute('aria-expanded', String(open));
-  };
+    const setOpen = (open: boolean) => {
+        if (!menu || !toggle) return;
+        menu.classList.toggle("hidden", !open);
+        openIcon?.classList.toggle("hidden", open);
+        closeIcon?.classList.toggle("hidden", !open);
+        toggle.setAttribute("aria-expanded", String(open));
+    };
 
-  toggle?.addEventListener('click', () =>
-    setOpen(menu?.classList.contains('hidden') ?? false),
-  );
-  menu?.querySelectorAll('[data-mobile-link]').forEach((l) =>
-    l.addEventListener('click', () => setOpen(false)),
-  );
+    toggle?.addEventListener("click", () =>
+        setOpen(menu?.classList.contains("hidden") ?? false),
+    );
+    menu?.querySelectorAll("[data-mobile-link]").forEach((l) =>
+        l.addEventListener("click", () => setOpen(false)),
+    );
 
-  const onScroll = () => {
-    const scrolled = window.scrollY > 10;
-    header?.classList.toggle('bg-background/85', scrolled);
-    header?.classList.toggle('backdrop-blur-md', scrolled);
-    header?.classList.toggle('border-b', scrolled);
-    header?.classList.toggle('border-border', scrolled);
-    header?.classList.toggle('shadow-sm', scrolled);
-    header?.classList.toggle('bg-transparent', !scrolled);
-  };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+    const onScroll = () => {
+        const scrolled = window.scrollY > 10;
+        header?.classList.toggle("bg-background/85", scrolled);
+        header?.classList.toggle("backdrop-blur-md", scrolled);
+        header?.classList.toggle("border-b", scrolled);
+        header?.classList.toggle("border-border", scrolled);
+        header?.classList.toggle("shadow-sm", scrolled);
+        header?.classList.toggle("bg-transparent", !scrolled);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
 </script>

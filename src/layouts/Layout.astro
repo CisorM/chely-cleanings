@@ -27,6 +27,11 @@ const ga = site.integrations.googleAnalyticsId;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
     <meta name="theme-color" content="#5E1B8E" />
 
+    <!-- Gate scroll-reveal hiding on JS so content is never invisible without it -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -51,5 +56,28 @@ const ga = site.integrations.googleAnalyticsId;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // Smooth fade-in / glide-up as sections scroll into view.
+      const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.12 },
+        );
+        items.forEach((el) => observer.observe(el));
+      }
+    </script>
   </body>
 </html>

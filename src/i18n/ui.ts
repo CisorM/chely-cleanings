@@ -35,7 +35,7 @@ export const ui = {
     'nav.langLabel': 'Language',
 
     // ---- Hero ----
-    'hero.badge': 'Nashville, TN — Trusted Cleaning',
+    'hero.badge': 'Nashville, TN — Professional Cleaning Service',
     'hero.headlineA': 'Pristine Spaces,',
     'hero.headlineB': 'Peace of Mind.',
     'hero.subheadline':
@@ -64,7 +64,7 @@ export const ui = {
     'about.vision':
       'To establish ourselves as a comprehensive services corporation with a presence throughout the state — distinguished by our culture of respect and professional attention to detail, exceeding the expectations of the most demanding sectors and improving the quality of life for families and productivity for businesses in Nashville.',
     'about.highlight1.title': 'Professional & Reliable',
-    'about.highlight1.body': 'Vetted, insured staff who show up on time — every time.',
+    'about.highlight1.body': 'Trained, attentive staff dedicated to delivering the best service.',
     'about.highlight2.title': 'Detail-Oriented',
     'about.highlight2.body': 'We sweat the small stuff so your space shines everywhere.',
     'about.highlight3.title': 'Nashville Local',
@@ -97,7 +97,7 @@ export const ui = {
     'contact.title': 'Get in touch',
     'contact.subtitle': 'We reply within a few hours during business days.',
     'contact.locationLabel': 'Location',
-    'contact.location': 'Nashville, Tennessee',
+    'contact.location': 'Nashville, Tennessee and surrounding areas',
     'contact.phoneLabel': 'Phone',
     'contact.emailLabel': 'Email',
     'contact.hoursLabel': 'Hours',
@@ -110,6 +110,20 @@ export const ui = {
     'booking.step1': 'Choose service',
     'booking.step2': 'Pick date & time',
     'booking.step3': 'Confirm & pay',
+
+    // ---- Contact form ----
+    'form.firstName': 'First Name',
+    'form.lastName': 'Last Name',
+    'form.email': 'Email',
+    'form.address': 'Address',
+    'form.phone': 'Phone Number',
+    'form.message': 'Message',
+    'form.send': 'Send',
+    'form.sending': 'Sending…',
+    'form.success': "Thanks! We've received your message and will get back to you shortly.",
+    'form.error': 'Something went wrong. Please call or email us instead.',
+    'form.followUs': 'Follow us',
+    'form.imageAlt': 'Chely Cleaning team member wiping down a clean home surface',
 
     // ---- Footer ----
     'footer.entity': 'Services and Solutions LLC',
@@ -141,7 +155,7 @@ export const ui = {
     'nav.langLabel': 'Idioma',
 
     // ---- Hero ----
-    'hero.badge': 'Nashville, TN — Limpieza de Confianza',
+    'hero.badge': 'Nashville, TN — Servicio Profesional de Limpieza',
     'hero.headlineA': 'Espacios Impecables,',
     'hero.headlineB': 'Tranquilidad Total.',
     'hero.subheadline':
@@ -170,7 +184,7 @@ export const ui = {
     'about.vision':
       'Consolidarnos como una corporación integral de servicios con presencia en todo el estado, distinguidos por nuestra cultura de respeto y atención profesional al detalle, superando las expectativas de los sectores más exigentes y mejorando la calidad de vida de las familias y la productividad de las empresas de Nashville.',
     'about.highlight1.title': 'Profesional y Confiable',
-    'about.highlight1.body': 'Personal verificado y asegurado que llega puntual, siempre.',
+    'about.highlight1.body': 'Personal capacitado y atento a dar el mejor servicio.',
     'about.highlight2.title': 'Atención al Detalle',
     'about.highlight2.body': 'Cuidamos lo más pequeño para que todo su espacio brille.',
     'about.highlight3.title': 'Local de Nashville',
@@ -203,7 +217,7 @@ export const ui = {
     'contact.title': 'Póngase en contacto',
     'contact.subtitle': 'Respondemos en pocas horas durante días hábiles.',
     'contact.locationLabel': 'Ubicación',
-    'contact.location': 'Nashville, Tennessee',
+    'contact.location': 'Nashville, Tennessee y sus alrededores',
     'contact.phoneLabel': 'Teléfono',
     'contact.emailLabel': 'Correo',
     'contact.hoursLabel': 'Horario',
@@ -216,6 +230,20 @@ export const ui = {
     'booking.step1': 'Elegir servicio',
     'booking.step2': 'Elegir fecha y hora',
     'booking.step3': 'Confirmar y pagar',
+
+    // ---- Contact form ----
+    'form.firstName': 'Nombre',
+    'form.lastName': 'Apellido',
+    'form.email': 'Correo',
+    'form.address': 'Dirección',
+    'form.phone': 'Teléfono',
+    'form.message': 'Mensaje',
+    'form.send': 'Enviar',
+    'form.sending': 'Enviando…',
+    'form.success': 'Gracias, recibimos su mensaje y le responderemos en breve.',
+    'form.error': 'Algo salió mal. Por favor llámenos o escríbanos directamente.',
+    'form.followUs': 'Síganos',
+    'form.imageAlt': 'Miembro del equipo de Chely Cleaning limpiando una superficie del hogar',
 
     // ---- Footer ----
     'footer.entity': 'Services and Solutions LLC',

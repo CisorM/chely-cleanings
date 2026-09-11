@@ -1,113 +1,205 @@
 ---
+import { Image } from 'astro:assets';
+import formImg from '../assets/hero-clean.jpg';
 import { site } from '../config/site';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const bkSub = site.integrations.bookingKoalaSubdomain;
-// Confirm the exact path in BookingKoala → Settings → Booking form → Embed.
-const bookingSrc = bkSub ? `https://${bkSub}.bookingkoala.com/booknow/residential` : '';
-
-const rows = [
-  { icon: '📍', label: t('contact.locationLabel'), value: t('contact.location') },
-  { icon: '📞', label: t('contact.phoneLabel'), value: site.contact.phoneDisplay, href: `tel:${site.contact.phone}` },
-  { icon: '✉️', label: t('contact.emailLabel'), value: site.contact.email, href: `mailto:${site.contact.email}` },
-  { icon: '🕒', label: t('contact.hoursLabel'), value: t('contact.hours') },
+const fields = [
+  { name: 'firstName', label: t('form.firstName'), type: 'text', autocomplete: 'given-name', half: true },
+  { name: 'lastName', label: t('form.lastName'), type: 'text', autocomplete: 'family-name', half: true },
+  { name: 'email', label: t('form.email'), type: 'email', autocomplete: 'email', half: false },
+  { name: 'address', label: t('form.address'), type: 'text', autocomplete: 'street-address', half: false },
+  { name: 'phone', label: t('form.phone'), type: 'tel', autocomplete: 'tel', half: false },
 ];
 
-const steps = [t('booking.step1'), t('booking.step2'), t('booking.step3')];
+const socials = [
+  { label: 'Facebook', href: site.social.facebook },
+  { label: 'Instagram', href: site.social.instagram },
+].filter((s) => s.href);
+
+const inputClass =
+  'peer w-full rounded-none border-0 border-b border-border bg-transparent px-0 py-2 text-base text-foreground outline-none transition-colors placeholder:text-transparent focus:border-primary';
 ---
 
 <section id="booking" class="relative py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-4 sm:px-6">
     <div class="mx-auto max-w-2xl text-center">
-      <span class="text-sm font-bold uppercase tracking-widest text-gradient-brand">
+      <span data-reveal class="text-sm font-bold uppercase tracking-widest text-gradient-brand">
         {t('booking.eyebrow')}
       </span>
-      <h2 id="contact" class="mt-3 scroll-mt-24 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
+      <h2 id="contact" data-reveal style="--reveal-delay:80ms" class="mt-3 scroll-mt-24 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
         {t('booking.title')}
       </h2>
-      <p class="mt-4 text-lg text-muted-foreground">{t('booking.subtitle')}</p>
+      <p data-reveal style="--reveal-delay:160ms" class="mt-4 text-lg text-muted-foreground">{t('booking.subtitle')}</p>
     </div>
 
-    <div class="mt-12 grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-      <!-- Contact card -->
-      <div class="rounded-3xl border border-border bg-card p-8 shadow-sm">
-        <h3 class="text-xl font-bold text-foreground">{t('contact.title')}</h3>
-        <p class="mt-2 text-sm text-muted-foreground">{t('contact.subtitle')}</p>
-        <ul class="mt-6 space-y-5">
-          {
-            rows.map((r) => (
-              <li class="flex items-start gap-4">
-                <div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-lg">
-                  <span>{r.icon}</span>
-                </div>
-                <div class="min-w-0">
-                  <div class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    {r.label}
-                  </div>
-                  <div class="text-base font-semibold text-foreground">
-                    {r.href ? (
-                      <a href={r.href} class="hover:text-primary">{r.value}</a>
-                    ) : (
-                      r.value
-                    )}
-                  </div>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-        <div class="mt-8 rounded-2xl gradient-brand p-5 text-primary-foreground">
-          <p class="text-sm font-semibold opacity-90">{t('booking.promoKicker')}</p>
-          <p class="mt-1 text-lg font-bold">{t('booking.promoText')}</p>
-        </div>
+    <div
+      data-reveal
+      style="--reveal-delay:120ms"
+      class="mt-12 grid overflow-hidden rounded-3xl border border-border bg-card shadow-sm lg:grid-cols-2"
+    >
+      <!-- Photo -->
+      <div class="relative min-h-[280px] border-b-4 border-primary lg:min-h-full lg:border-b-0 lg:border-r-4">
+        <Image
+          src={formImg}
+          alt={t('form.imageAlt')}
+          class="absolute inset-0 h-full w-full object-cover"
+          widths={[480, 768, 1024]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          loading="lazy"
+        />
       </div>
 
-      <!-- BookingKoala embed slot -->
-      <div class="rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-6">
-        <div
-          id="bookingkoala-widget"
-          class="relative min-h-[520px] w-full overflow-hidden rounded-2xl border-2 border-dashed border-primary/25 bg-muted/60"
-        >
-          {
-            bookingSrc ? (
-              <iframe
-                src={bookingSrc}
-                title="BookingKoala online booking"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                class="absolute inset-0 h-full w-full"
-              />
-            ) : (
-              <div class="flex min-h-[520px] items-center justify-center p-8 text-center">
-                <div>
-                  <div class="mx-auto grid h-16 w-16 place-items-center rounded-2xl gradient-brand text-2xl text-primary-foreground shadow-md">
-                    📅
-                  </div>
-                  <h3 class="mt-5 text-xl font-bold text-foreground">
-                    {t('booking.widgetFallback')}
-                  </h3>
-                  <p class="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-                    {t('booking.widgetHint')}
-                  </p>
-                  <div class="mt-6 flex flex-wrap justify-center gap-2">
-                    {steps.map((s, i) => (
-                      <div class="flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground">
-                        <span class="grid h-5 w-5 place-items-center rounded-full gradient-brand text-[10px] text-primary-foreground">
-                          {i + 1}
-                        </span>
-                        {s}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )
-          }
+      <!-- Form -->
+      <div class="p-8 sm:p-10 lg:p-12">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+          <span>{t('contact.location')}</span>
+          <span aria-hidden="true" class="hidden h-4 w-px bg-border sm:block"></span>
+          <a href={`mailto:${site.contact.email}`} class="hover:text-primary">{site.contact.email}</a>
+          <span aria-hidden="true" class="hidden h-4 w-px bg-border sm:block"></span>
+          <a href={`tel:${site.contact.phone}`} class="hover:text-primary">{site.contact.phoneDisplay}</a>
         </div>
+
+        <h3 class="mt-4 text-2xl font-bold text-foreground sm:text-3xl">{t('contact.title')}</h3>
+        <p class="mt-2 text-sm text-muted-foreground">{t('contact.subtitle')}</p>
+
+        <form
+          data-contact-form
+          data-sending={t('form.sending')}
+          data-success={t('form.success')}
+          data-error={t('form.error')}
+          class="mt-8 space-y-6"
+          novalidate
+        >
+          <div class="grid gap-6 sm:grid-cols-2">
+            {
+              fields.map((f) => (
+                <div class={f.half ? '' : 'sm:col-span-2'}>
+                  <label for={`cf-${f.name}`} class="block text-sm font-semibold text-foreground">
+                    {f.label} <span class="text-primary">*</span>
+                  </label>
+                  <input
+                    id={`cf-${f.name}`}
+                    name={f.name}
+                    type={f.type}
+                    required
+                    autocomplete={f.autocomplete}
+                    placeholder={f.label}
+                    class={inputClass}
+                  />
+                </div>
+              ))
+            }
+          </div>
+
+          <div>
+            <label for="cf-message" class="block text-sm font-semibold text-foreground">
+              {t('form.message')} <span class="text-primary">*</span>
+            </label>
+            <textarea
+              id="cf-message"
+              name="message"
+              rows="4"
+              required
+              placeholder={t('form.message')}
+              class={`${inputClass} resize-y`}
+            ></textarea>
+          </div>
+
+          {/* Honeypot — hidden from humans, catches bots */}
+          <div class="absolute left-[-9999px]" aria-hidden="true">
+            <label>
+              Company
+              <input type="text" name="company" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <button
+              type="submit"
+              data-submit
+              class="inline-flex items-center justify-center rounded-full gradient-brand px-8 py-3 text-base font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-transform hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
+            >
+              {t('form.send')}
+            </button>
+            <p data-form-status role="status" aria-live="polite" class="text-sm font-semibold"></p>
+          </div>
+        </form>
+
+        {
+          socials.length > 0 && (
+            <div class="mt-8 flex items-center gap-5 border-t border-border pt-6 text-sm">
+              <span class="font-semibold text-muted-foreground">{t('form.followUs')}</span>
+              {socials.map((s) => (
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  class="font-bold text-primary underline-offset-4 hover:underline"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
+          )
+        }
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const status = document.querySelector<HTMLParagraphElement>('[data-form-status]');
+  const submit = document.querySelector<HTMLButtonElement>('[data-submit]');
+
+  const MESSAGES = {
+    sending: form?.dataset.sending ?? 'Sending…',
+    success: form?.dataset.success ?? 'Thanks! We will get back to you shortly.',
+    error: form?.dataset.error ?? 'Something went wrong. Please email or call us.',
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form || !submit || !status) return;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const sendLabel = submit.textContent;
+    submit.disabled = true;
+    submit.textContent = MESSAGES.sending;
+    status.textContent = '';
+    status.className = 'text-sm font-semibold text-muted-foreground';
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        form.reset();
+        status.textContent = MESSAGES.success;
+        status.className = 'text-sm font-semibold text-secondary';
+      } else {
+        status.textContent = MESSAGES.error;
+        status.className = 'text-sm font-semibold text-destructive';
+      }
+    } catch {
+      status.textContent = MESSAGES.error;
+      status.className = 'text-sm font-semibold text-destructive';
+    } finally {
+      submit.disabled = false;
+      submit.textContent = sendLabel;
+    }
+  });
+</script>

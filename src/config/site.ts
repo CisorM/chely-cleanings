@@ -14,8 +14,8 @@ export const site = {
   // ---- Contact / NAP -------------------------------------------------------
   contact: {
     // E.164 for tel: links, formatted for display. PLACEHOLDER — replace.
-    phone: '+16155550123',
-    phoneDisplay: '(615) 555-0123',
+    phone: '+16156172562',
+    phoneDisplay: '(615) 617-2562',
     email: 'hello@chelycleaning.com',
   },
   address: {
@@ -50,8 +50,8 @@ export const site = {
 
   // ---- Social ------------------------------------------------------------
   social: {
-    facebook: '',
-    instagram: '',
+    facebook: 'https://www.facebook.com/share/196b8txzhB/?mibextid=wwXIfr',
+    instagram: 'https://www.instagram.com/chelycleanings',
     tiktok: '',
     google: '', // Google Business Profile URL
   },
